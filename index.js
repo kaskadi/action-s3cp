@@ -1,3 +1,3 @@
 const pj = require('./package.json')
 
-console.log(pj.name, __pathname)
+console.log(pj.name, __dirname)
