@@ -89,7 +89,10 @@ function parse (path) {
 }
 
 function getCurrentBranchName(cwd = process.cwd()) {
-  console.log(fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8'))
-  console.log(fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8'))
-  return fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').replace('ref: refs/heads/', '')
+  const headData = fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8')
+  if (headData.includes('ref: refs/heads/')) {
+    return headData.replace('ref: refs/heads/', '')
+  } else {
+    return fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8').split('\n').filter(line => line.includes(headData))[0].split('\'')[1]
+  }
 }
