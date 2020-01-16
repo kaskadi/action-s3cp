@@ -3,7 +3,6 @@ const core = require('@actions/core')
 const fs = require('fs')
 const cwd = process.cwd()
 const package = require(`${cwd}/package.json`)
-console.log(package)
 const kaskadiOptions = package.kaskadi
 
 const s3 = new AWS.S3({
@@ -20,8 +19,7 @@ kaskadiOptions['s3-push'].files.forEach(fileData => {
     Bucket: 'kaskadi-public',
     Key: resolvePath(fileData.dest)
   }
-  console.log(params)
-  // s3.putObject(params).promise(console.log).catch(console.log)
+  s3.putObject(params).promise(console.log).catch(console.log)
 })
 
 function resolvePath (path) {
