@@ -89,7 +89,7 @@ function parse (path) {
 }
 
 function getCurrentBranchName(cwd = process.cwd()) {
-  console.log(fs.readFileSync(`${cwd}/.git/HEAD`), 'utf-8')
+  console.log(fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8'))
   console.log(fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8'))
   return fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').replace('ref: refs/heads/', '')
 }
