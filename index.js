@@ -37,7 +37,11 @@ function resolvePath (path) {
 function resolver (tokenValue) {
   switch (tokenValue) {
     case 'version':
-      return `v${package.version.split('.')[0]}/`
+      const branch = getCurrentBranchName(cwd)
+      if (branch !== 'master') {
+        return `${branch}/`
+      }
+      return ''
   }
 }
 
@@ -79,4 +83,8 @@ function parse (path) {
     value: currentToken
   })
   return result
+}
+
+function getCurrentBranchName(cwd = process.cwd()) {
+  return fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').replace('ref: refs/heads/', '')
 }
