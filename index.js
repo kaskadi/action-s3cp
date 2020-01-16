@@ -95,9 +95,6 @@ function getCurrentBranchName(cwd = process.cwd()) {
   } else {
     const fetchHeadLines = fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8').split('\n')
     const branchLines = fetchHeadLines.filter(line => line.includes(headData))
-    console.log(headData)
-    console.log('fetchHeadLines', fetchHeadLines)
-    console.log('branchLines', branchLines)
-    return '' // branchLines[0].split('\'')[1]
+    return branchLines[0].split('\'')[1]
   }
 }
