@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/kaskadi/action-s3cp/issues"
   },
-  "homepage": "https://github.com/kaskadi/action-s3cp#readme"
+  "homepage": "https://github.com/kaskadi/action-s3cp#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.1"
+  }
 }
