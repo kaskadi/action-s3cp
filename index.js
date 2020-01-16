@@ -36,7 +36,7 @@ function resolvePath (path) {
 
 function resolver (tokenValue) {
   switch (tokenValue) {
-    case 'version':
+    case 'branch':
       const branch = getCurrentBranchName(cwd)
       if (branch !== 'master') {
         return `${branch}/`
