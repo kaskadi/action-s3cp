@@ -38,9 +38,12 @@ function resolver (tokenValue) {
   switch (tokenValue) {
     case 'branch':
       const branch = getCurrentBranchName(cwd)
+      console.log(branch)
       if (branch !== 'master') {
         return `${branch}/`
       }
+      return ''
+    default:
       return ''
   }
 }
@@ -86,5 +89,6 @@ function parse (path) {
 }
 
 function getCurrentBranchName(cwd = process.cwd()) {
+  console.log(fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8'))
   return fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').replace('ref: refs/heads/', '')
 }
