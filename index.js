@@ -19,7 +19,7 @@ kaskadiOptions['s3-push'].files.forEach(fileData => {
     Bucket: 'kaskadi-public',
     Key: resolvePath(fileData.dest)
   }
-  s3.putObject(params).promise(console.log).catch(console.log)
+  // s3.putObject(params).promise(console.log).catch(console.log)
 })
 
 function resolvePath (path) {
