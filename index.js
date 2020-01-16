@@ -93,6 +93,9 @@ function getCurrentBranchName(cwd = process.cwd()) {
   if (headData.includes('ref: refs/heads/')) {
     return headData.replace('ref: refs/heads/', '')
   } else {
-    return fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8').split('\n').filter(line => line.includes(headData))[0].split('\'')[1]
+    const fetchHeadLines = fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8').split('\n')
+    const branchLines = fetchHeadLines.filter(line => line.includes(headData))
+    console.log(fetchHeadLines, branchLines)
+    return branchLines[0].split('\'')[1]
   }
 }
