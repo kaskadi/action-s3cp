@@ -1,0 +1,20 @@
+{
+  "name": "action-s3cp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaskadi/action-s3cp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaskadi/action-s3cp/issues"
+  },
+  "homepage": "https://github.com/kaskadi/action-s3cp#readme"
+}

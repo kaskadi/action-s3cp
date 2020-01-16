@@ -1,0 +1,5 @@
+name: 'action-s3cp'
+description: 'Copies files over to S3 bucket'
+runs:
+  using: 'node12'
+  main: 'index.js'
