@@ -38,7 +38,6 @@ function resolver (tokenValue) {
   switch (tokenValue) {
     case 'branch':
       const branch = getCurrentBranchName(cwd)
-      console.log(branch)
       if (branch !== 'master') {
         return `${branch}/`
       }
