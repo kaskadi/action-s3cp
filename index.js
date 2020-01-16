@@ -1,3 +1,4 @@
 const pj = require('./package.json')
+const fs = require('fs')
 
-console.log(pj.name, __dirname, process.argv)
+console.log(fs.readdirSync('/github/workspace/'))
