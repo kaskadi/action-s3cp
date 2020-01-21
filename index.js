@@ -27,12 +27,12 @@ kaskadiOptions['s3-push'].files.forEach(fileData => {
 function resolvePath (path) {
   let branch = getCurrentBranchName()
   if (branch === 'master') {
-    return path.replace(/{branch}/g, '')
+    branch = ''
   }
   if (branch.slice(0, 7) === 'release/') {
-    branch = branch.split('/')[1]
-    return path.replace(/{branch}/g, branch + "/")
+    branch += '/'
   }
+  return path.replace(/{branch}/g, branch)
   // let parsedPath = parse(path)
   // parsedPath = parsedPath.map(token => {
   //   if (token.type === 'part') {
