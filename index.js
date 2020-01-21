@@ -25,69 +25,70 @@ kaskadiOptions['s3-push'].files.forEach(fileData => {
 })
 
 function resolvePath (path) {
-  let parsedPath = parse(path)
-  parsedPath = parsedPath.map(token => {
-    if (token.type === 'part') {
-      return token.value
-    } else {
-      return resolver(token.value)
-    }
-  })
-  return parsedPath.join('')
+  return path.replace(/{branch}/g, getCurrentBranchName() + "/")
+  // let parsedPath = parse(path)
+  // parsedPath = parsedPath.map(token => {
+  //   if (token.type === 'part') {
+  //     return token.value
+  //   } else {
+  //     return resolver(token.value)
+  //   }
+  // })
+  // return parsedPath.join('')
 }
 
-function resolver (tokenValue) {
-  switch (tokenValue) {
-    case 'branch':
-      const branch = getCurrentBranchName(cwd)
-      if (branch !== 'master') {
-        return `${branch}/`
-      }
-      return ''
-    default:
-      return ''
-  }
-}
-
-function parse (path) {
-  let state = 0
-  let result = []
-  let currentToken = ''
-  for (let i=0; i < path.length; i++) {
-    let currentChar = path.charAt(i)
-    switch (state) {
-      case 0:
-        if (currentChar === '{') {
-          state = 1
-          result.push({
-            type: 'part',
-            value: currentToken
-          })
-          currentToken = ''
-        } else {
-          currentToken += currentChar
-        }
-      break
-      case 1:
-        if (currentChar === '}') {
-          state = 0
-          result.push({
-            type: 'token',
-            value: currentToken
-          })
-          currentToken = ''
-        } else {
-          currentToken += currentChar
-        }
-      break
-    }
-  }
-  result.push({
-    type: 'part',
-    value: currentToken
-  })
-  return result
-}
+// function resolver (tokenValue) {
+//   switch (tokenValue) {
+//     case 'branch':
+//       const branch = getCurrentBranchName(cwd)
+//       if (branch !== 'master') {
+//         return `${branch}/`
+//       }
+//       return ''
+//     default:
+//       return ''
+//   }
+// }
+//
+// function parse (path) {
+//   let state = 0
+//   let result = []
+//   let currentToken = ''
+//   for (let i=0; i < path.length; i++) {
+//     let currentChar = path.charAt(i)
+//     switch (state) {
+//       case 0:
+//         if (currentChar === '{') {
+//           state = 1
+//           result.push({
+//             type: 'part',
+//             value: currentToken
+//           })
+//           currentToken = ''
+//         } else {
+//           currentToken += currentChar
+//         }
+//       break
+//       case 1:
+//         if (currentChar === '}') {
+//           state = 0
+//           result.push({
+//             type: 'token',
+//             value: currentToken
+//           })
+//           currentToken = ''
+//         } else {
+//           currentToken += currentChar
+//         }
+//       break
+//     }
+//   }
+//   result.push({
+//     type: 'part',
+//     value: currentToken
+//   })
+//   return result
+// }
 
 function getCurrentBranchName(cwd = process.cwd()) {
   const headData = fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').trim()
