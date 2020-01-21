@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk')
-const core = require('@actions/core')
 const fs = require('fs')
 const mime = require('mime-types')
 const cwd = process.cwd()
