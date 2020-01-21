@@ -28,8 +28,7 @@ function resolvePath (path) {
   let branch = getCurrentBranchName()
   if (branch === 'master') {
     branch = ''
-  }
-  if (branch.slice(0, 7) === 'release/') {
+  } else {
     branch += '/'
   }
   return path.replace(/{branch}/g, branch)
