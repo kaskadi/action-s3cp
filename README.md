@@ -37,5 +37,5 @@ jobs:
         AWS_KEY_SECRET: ${{ secrets.AWS_KEY_SECRET }}
 ```
 
-Before trying to trigger your new workflow, please set both `AWS_KEY_ID` and `AWS_KEY_SECRET` in the secrets of your bucket.
+Before trying to trigger your new workflow, please set both `AWS_KEY_ID` and `AWS_KEY_SECRET` in the secrets of your repository.
 Those credentials are the ones giving programmatic access to an AWS IAM role which can put objects to S3.
