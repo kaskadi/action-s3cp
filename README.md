@@ -8,7 +8,7 @@
 
 **LGTM**
 
-[![](https://img.shields.io/lgtm/grade/javascript/github/kaskadi/action-s3cp)](https://lgtm.com/projects/g/kaskadi/action-s3cp/?mode=list)
+[![](https://img.shields.io/lgtm/grade/javascript/github/kaskadi/action-s3cp?logo=lgtm)](https://lgtm.com/projects/g/kaskadi/action-s3cp/?mode=list)
 
 ***
 
