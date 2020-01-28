@@ -34,6 +34,12 @@ async function uploadFolder (data) {
     Bucket: bucket,
     Key: dest
   }
+  console.log('Folder',
+    {
+      src,
+      dest
+    }
+  )
   await s3.putObject(params).promise().catch(console.log)
   // for all files in the folder, repeat upload process
   fs.readdirSync(data.src).forEach(file => {
@@ -46,6 +52,7 @@ async function uploadFolder (data) {
 }
 
 function uploadFile (data) {
+  console.log('File', data)
   const params = {
     Body: fs.readFileSync(data.src),
     Bucket: bucket,
