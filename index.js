@@ -34,13 +34,7 @@ function resolvePath (path) {
   return path.replace(/{branch}/g, branch)
 }
 
-function getCurrentBranchName(cwd = process.cwd()) {
-  const headData = fs.readFileSync(`${cwd}/.git/HEAD`, 'utf-8').trim()
-  if (headData.includes('ref: refs/heads/')) {
-    return headData.replace('ref: refs/heads/', '')
-  } else {
-    const fetchHeadLines = fs.readFileSync(`${cwd}/.git/FETCH_HEAD`, 'utf-8').split('\n')
-    const branchLines = fetchHeadLines.filter(line => line.includes(headData))
-    return branchLines[0].split('\'')[1]
-  }
+function getCurrentBranchName() {
+  const refs = process.env.GITHUB_REF.split('/')
+  return refs[refs.length - 1]
 }
