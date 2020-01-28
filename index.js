@@ -27,7 +27,7 @@ function upload (data) {
 function uploadFolder (data) {
   const src = data.src.charAt(data.src.length - 1) !== '/' ? `${data.src}/` : data.src
   let dest = data.dest.charAt(data.dest.length - 1) !== '/' ? `${data.dest}/` : data.dest
-  let dest = resolvePath(data.dest)
+  dest = resolvePath(data.dest)
   // create folder
   const params = {
     Body: '',
