@@ -24,14 +24,14 @@ function upload (data) {
   }
 }
 
-function uploadFolder (data) {
+async function uploadFolder (data) {
   // create folder
   const params = {
     Body: '',
     Bucket: bucket,
     Key: resolvePath(data.dest)
   }
-  s3.putObject(params).promise(console.log).catch(console.log)
+  await s3.putObject(params).promise(console.log).catch(console.log)
   // for all files in the folder, repeat upload process
   fs.readdirSync(data.src).forEach(file => {
     const uploadData = {
