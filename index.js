@@ -24,23 +24,22 @@ function upload (data) {
   }
 }
 
-async function uploadFolder (data) {
-  let folderKey = resolvePath(data.dest)
-  if (folderKey.charAt(folderKey.length - 1) !== '/') {
-    folderKey += '/'
-  }
+function uploadFolder (data) {
+  const src = data.src.charAt(data.src.length - 1) !== '/' ? `${data.src}/` : data.src
+  let dest = data.dest.charAt(data.dest.length - 1) !== '/' ? `${data.dest}/` : data.dest
+  let dest = resolvePath(data.dest)
   // create folder
   const params = {
     Body: '',
     Bucket: bucket,
-    Key: folderKey
+    Key: dest
   }
   await s3.putObject(params).promise().catch(console.log)
   // for all files in the folder, repeat upload process
   fs.readdirSync(data.src).forEach(file => {
     const uploadData = {
-      src: `${data.src}/${file}`,
-      dest: `${data.dest}/${file}`
+      src: `${src}${file}`,
+      dest: `${dest}${file}`
     }
     upload(uploadData)
   })
