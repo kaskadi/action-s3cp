@@ -1,0 +1,12 @@
+name: update
+on:
+  schedule:
+    # update every sunday at 7AM
+    - cron:  '0 7 * * 0'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update packages
+      run: bash .github/workflows/scripts/update.sh
