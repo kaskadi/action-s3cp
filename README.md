@@ -54,8 +54,16 @@ In order to tell the action which file to upload to S3, you need to add the foll
       {
         "src": "path/to/file2.ext",
         "dest": "path/to/{branch}where/is/file2.ext"
+      },
+      {
+        "src": "folder1/",
+        "dest": "path/to/folder1/"
       }
     ]
   }
 }
 ```
+
+**Notes:**
+- uploading a folder will always do a recursive upload
+- the placeholder `{branch}` is removed if the action is triggered from `master` or replaced by the current version if the action is triggered from `release/vx.x.x`
