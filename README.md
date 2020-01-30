@@ -41,3 +41,21 @@ Before trying to trigger your new workflow, please set both `AWS_KEY_ID` and `AW
 Those credentials are the ones giving programmatic access to an AWS IAM role which can put objects to S3.
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
+
+In order to tell the action which file to upload to S3, you need to add the following field into your `package.json` file (root level):
+```
+"kaskadi": {
+  "s3-push": {
+    "files": [
+      {
+        "src": "file1.ext",
+        "dest": "path/to/{branch}file1.ext"
+      },
+      {
+        "src": "path/to/file2.ext",
+        "dest": "path/to/{branch}where/is/file2.ext"
+      }
+    ]
+  }
+}
+```
