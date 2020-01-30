@@ -24,11 +24,11 @@ You can use the following code as a new _GitHub Actions Workflow_:
 name: {YOUR-ACTION-NAME}
 on: [{YOUR-ACTION-EVENT}]
 jobs:
-  publish:
+  {YOUR-JOB-NAME}:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Upload files to S3 bucket
+    - name: {YOUR-STEP-name}
       uses: kaskadi/action-s3cp@master
       env:
         AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
