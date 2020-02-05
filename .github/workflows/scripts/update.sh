@@ -6,7 +6,8 @@ then
   npm update --dev
   git config --global user.name 'Alexis Lemaire'
   git config --global user.email 'a.lemaire@klimapartner.de'
-  git commit -am "Updated packages"
+  git add .
+  git commit -m "Updated packages"
   git push
   echo "Packages have been updated."
 else
