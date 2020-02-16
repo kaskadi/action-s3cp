@@ -23,7 +23,7 @@
   "homepage": "https://github.com/kaskadi/action-s3cp#readme",
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "aws-sdk": "^2.614.0",
+    "aws-sdk": "^2.619.0",
     "mime-types": "^2.1.26"
   }
 }
