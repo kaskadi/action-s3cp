@@ -4,7 +4,8 @@
   "description": "a GitHub action that automate deployment of files to S3",
   "main": "index.js",
   "scripts": {
-    "test": "standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js"
+    "test": "standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js",
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,15 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
     "standard": "^14.3.1"
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "report-dir": "./coverage"
   }
 }
