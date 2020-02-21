@@ -7,8 +7,12 @@
           "dest": "action-s3cp-test/{branch}test.txt"
         },
         {
-          "src": "data/test",
-          "dest": "action-s3cp-test/{branch}test"
+          "src": "data/test/",
+          "dest": "action-s3cp-test/{branch}test/"
+        },
+        {
+          "src": "data/old.txt",
+          "dest": "action-s3cp-test/{branch}new.txt"
         }
       ]
     }

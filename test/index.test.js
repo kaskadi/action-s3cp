@@ -1,8 +1,7 @@
 /* eslint-env mocha */
 process.chdir('test')
 const AWS = require('aws-sdk')
-const pjson = require('./package.json')
-const kaskadiOptions = pjson.kaskadi
+const exec = require('child_process').exec
 const bucket = 'kaskadi-public'
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
@@ -14,40 +13,64 @@ const chai = require('chai')
 chai.should()
 
 describe('action-s3cp', () => {
-  it('should upload the files given into package.json to the correct location when branch is master', async () => {
-    process.env.GITHUB_REF = 'ref:head/master'
-    require('../index.js')
-    const test = await new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        resolve(await testFiles())
-      }, 1000)
+  describe('uploads files to the correct location when branch is master', () => {
+    const ref = 'ref:head/master'
+    const refs = ref.split('/')
+    const placeHolder = refs[refs.length - 1] === 'master' ? '' : `${refs[refs.length - 1]}/`
+    before(async () => {
+      process.env.GITHUB_REF = ref
+      await init()
     })
-    test.should.equal(true)
+    tests(placeHolder)
+    after(async () => {
+      await emptyS3Directory(bucket, 'action-s3cp-test/')
+    })
   })
-  // it('should upload the files given into package.json to the correct location when branch is NOT master', async () => {
-  //   process.env.GITHUB_REF = 'ref:head/release/v1.0.0'
-  //   require('../index.js')
-  //   const test = await testFiles()
-  //   test.should.equal(true)
-  // })
-  after(() => {
-    // since index.js does its work without awaiting we want to make sure that the files are uploaded before deleting them
-    setTimeout(() => {
-      emptyS3Directory(bucket, 'action-s3cp-test/')
-    }, 2000)
+  describe('uploads files to the correct location when branch is NOT master', async () => {
+    const ref = 'ref:head/release/v1.0.0'
+    const refs = ref.split('/')
+    const placeHolder = refs[refs.length - 1] === 'master' ? '' : `${refs[refs.length - 1]}/`
+    before(async () => {
+      process.env.GITHUB_REF = ref
+      await init()
+    })
+    tests(placeHolder)
+    after(async () => {
+      await emptyS3Directory(bucket, 'action-s3cp-test/')
+    })
   })
 })
 
-async function testFiles () {
-  const tests = []
-  const refs = process.env.GITHUB_REF.split('/')
-  const branch = refs[refs.length - 1]
-  for (const file of kaskadiOptions['s3-push'].files) {
-    const dest = branch !== 'master' ? file.dest.replace('{branch}', `${branch}/`) : file.dest.replace('{branch}', '')
-    tests.push(await fileExists(dest, bucket))
-  }
-  console.log(tests)
-  return tests.filter(test => test).length === tests.length
+async function init () {
+  exec('node ../index.js', (error, stdout, stderr) => {
+    console.log(stdout)
+    if (error !== null) {
+      console.log(error)
+    }
+  })
+  await new Promise(resolve => setTimeout(resolve, 1500))
+}
+
+function tests (placeHolder) {
+  it('should direct upload files', async () => {
+    const test = await fileExists(`action-s3cp-test/${placeHolder}test.txt`, bucket)
+    test.should.equal(true)
+  })
+  it('should rename files accordingly', async () => {
+    const testNew = await fileExists(`action-s3cp-test/${placeHolder}new.txt`, bucket)
+    const testOld = await fileExists(`action-s3cp-test/${placeHolder}old.txt`, bucket)
+    testNew.should.equal(true)
+    testOld.should.equal(false)
+  })
+  it('should upload folders', async () => {
+    const tests = []
+    const testFolderKeys = ['test.txt', 'test/', 'test/test.txt']
+    for (const key of testFolderKeys) {
+      tests.push(await fileExists(`action-s3cp-test/${placeHolder}test/${key}`, bucket))
+    }
+    const test = tests.filter(test => test).length === tests.length
+    test.should.equal(true)
+  })
 }
 
 async function fileExists (key, bucket) {
