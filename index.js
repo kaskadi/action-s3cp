@@ -2,8 +2,8 @@ const AWS = require('aws-sdk')
 const fs = require('fs')
 const mime = require('mime-types')
 const cwd = process.cwd()
-const package = require(`${cwd}/package.json`)
-const kaskadiOptions = package.kaskadi
+const pjson = require(`${cwd}/package.json`)
+const kaskadiOptions = pjson.kaskadi
 const bucket = 'kaskadi-public'
 
 const s3 = new AWS.S3({
@@ -69,7 +69,7 @@ function resolvePath (path) {
   return path.replace(/{branch}/g, branch)
 }
 
-function getCurrentBranchName() {
+function getCurrentBranchName () {
   const refs = process.env.GITHUB_REF.split('/')
   return refs[refs.length - 1]
 }

@@ -4,7 +4,7 @@
   "description": "a GitHub action that automate deployment of files to S3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard --fix && mocha test/*.test.js --require test/mocha-color-setter.js"
   },
   "repository": {
     "type": "git",

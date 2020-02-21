@@ -1,0 +1,16 @@
+{
+  "kaskadi": {
+    "s3-push": {
+      "files": [
+        {
+          "src": "data/test.txt",
+          "dest": "action-s3cp-test/{branch}test.txt"
+        },
+        {
+          "src": "data/test",
+          "dest": "action-s3cp-test/{branch}test"
+        }
+      ]
+    }
+  }
+}
