@@ -4,7 +4,7 @@
 
 [![](https://img.shields.io/codeclimate/maintainability/kaskadi/action-s3cp?label=maintainability&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/action-s3cp)
 [![](https://img.shields.io/codeclimate/tech-debt/kaskadi/action-s3cp?label=technical%20debt&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/action-s3cp)
-<!-- [![](https://img.shields.io/codeclimate/coverage/kaskadi/action-s3cp?label=test%20coverage&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/action-s3cp) -->
+[![](https://img.shields.io/codeclimate/coverage/kaskadi/action-s3cp?label=test%20coverage&logo=Code%20Climate)](https://codeclimate.com/github/kaskadi/action-s3cp)
 
 **LGTM**
 
