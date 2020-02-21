@@ -19,3 +19,6 @@ jobs:
       with:
         coverageCommand: npm run coverage
         coverageLocations: ./coverage/lcov.info:lcov
+      env:
+        AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+        AWS_KEY_SECRET: ${{ secrets.AWS_KEY_SECRET }}
