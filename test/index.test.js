@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 process.chdir('test')
 const AWS = require('aws-sdk')
-const exec = require('child_process').exec
+const childProc = require('child_process')
 const bucket = 'kaskadi-public'
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
@@ -12,7 +12,8 @@ const s3 = new AWS.S3({
 const chai = require('chai')
 chai.should()
 
-describe('action-s3cp', () => {
+describe('action-s3cp', function () {
+  this.timeout(4000)
   describe('uploads files to the correct location when branch is master', () => {
     const ref = 'ref:head/master'
     const refs = ref.split('/')
@@ -26,7 +27,7 @@ describe('action-s3cp', () => {
       await emptyS3Directory(bucket, 'action-s3cp-test/')
     })
   })
-  describe('uploads files to the correct location when branch is NOT master', async () => {
+  describe('uploads files to the correct location when branch is NOT master', () => {
     const ref = 'ref:head/release/v1.0.0'
     const refs = ref.split('/')
     const placeHolder = refs[refs.length - 1] === 'master' ? '' : `${refs[refs.length - 1]}/`
@@ -42,13 +43,22 @@ describe('action-s3cp', () => {
 })
 
 async function init () {
-  exec('node ../index.js', (error, stdout, stderr) => {
-    console.log(stdout)
-    if (error !== null) {
-      console.log(error)
-    }
-  })
+  await execMain()
   await new Promise(resolve => setTimeout(resolve, 1500))
+}
+
+function execMain () {
+  return new Promise((resolve, reject) => {
+    childProc.exec('node ../index.js', (err, stdout, stderr) => {
+      if (err === null) {
+        console.log(stdout)
+        resolve(true)
+      } else {
+        console.log(stderr)
+        resolve(false)
+      }
+    })
+  })
 }
 
 function tests (placeHolder) {
