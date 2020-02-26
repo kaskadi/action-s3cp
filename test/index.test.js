@@ -13,7 +13,7 @@ const chai = require('chai')
 chai.should()
 
 describe('action-s3cp', function () {
-  this.timeout(4000)
+  this.timeout(10000)
   describe('uploads files to the correct location when branch is master', () => {
     const ref = 'ref:head/master'
     const refs = ref.split('/')
