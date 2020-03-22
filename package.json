@@ -24,14 +24,14 @@
   "homepage": "https://github.com/kaskadi/action-s3cp#readme",
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "aws-sdk": "^2.639.0",
+    "aws-sdk": "^2.643.0",
     "mime-types": "^2.1.26"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.0",
+    "mocha": "^7.1.1",
     "nyc": "^15.0.0",
-    "standard": "^14.3.2"
+    "standard": "^14.3.3"
   },
   "nyc": {
     "reporter": [
