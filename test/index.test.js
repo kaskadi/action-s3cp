@@ -73,26 +73,24 @@ function tests (placeHolder) {
     testOld.should.equal(false)
   })
   it('should upload folders', async () => {
-    const tests = []
     const testFolderKeys = ['test.txt', 'test/', 'test/test.txt']
-    for (const key of testFolderKeys) {
-      tests.push(await fileExists(`action-s3cp-test/${placeHolder}test/${key}`, bucket))
-    }
+    const tests = await Promise.all(testFolderKeys.map(key => fileExists(`action-s3cp-test/${placeHolder}test/${key}`, bucket)))
     const test = tests.filter(test => test).length === tests.length
     test.should.equal(true)
   })
 }
 
-async function fileExists (key, bucket) {
+function fileExists (key, bucket) {
   const params = {
     Bucket: bucket,
-    Key: key
+    Delimiter: '/',
+    Prefix: key
   }
-  let response = true
-  await s3.headObject(params).promise().catch(() => {
-    response = false
-  })
-  return response
+  return s3.listObjectsV2(params).promise().then(res => res.Contents.length > 0)
+    .catch(err => {
+      console.log(err)
+      return false
+    })
 }
 
 async function emptyS3Directory (bucket, dir) {
