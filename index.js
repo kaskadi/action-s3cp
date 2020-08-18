@@ -26,8 +26,8 @@ function upload (data) {
 }
 
 async function uploadFolder (data) {
-  const src = data.src
-  let dest = data.dest
+  const src = appendPath(data.src)
+  let dest = appendPath(data.dest)
   dest = resolvePath(dest)
   // create folder
   const params = {
@@ -54,6 +54,12 @@ function uploadFile (data) {
     ContentType: mime.lookup(data.src)
   }
   s3.putObject(params).promise().catch(console.log)
+}
+
+function appendPath (path) {
+  const lastChar = path.charAt(path.length - 1)
+  const lastPart = path.split('/').pop()
+  return lastChar !== '/' && lastPart !== '{branch}' ? `${path}/` : path
 }
 
 function resolvePath (path) {
