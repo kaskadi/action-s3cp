@@ -2,7 +2,7 @@ const appendPath = require('./append-path.js')
 
 module.exports = upload
 
-function upload (s3, fs, bucket, mime, data) {
+function upload (s3, fs, mime, data) {
   const isDirectory = fs.lstatSync(data.src).isDirectory()
   if (isDirectory) {
     return Promise.all(fs.readdirSync(data.src).map(file => {
@@ -10,14 +10,15 @@ function upload (s3, fs, bucket, mime, data) {
         src: `${appendPath(data.src)}${file}`,
         dest: `${appendPath(data.dest)}${file}`
       }
-      return upload(s3, fs, bucket, mime, uploadData)
+      return upload(s3, fs, mime, uploadData)
     }))
   } else {
-    return uploadFile(s3, fs, bucket, mime, data)
+    return uploadFile(s3, fs, mime, data)
   }
 }
 
-function uploadFile (s3, fs, bucket, mime, data) {
+function uploadFile (s3, fs, mime, data) {
+  const bucket = process.env.BUCKET
   const params = {
     Body: fs.readFileSync(data.src),
     Bucket: bucket,

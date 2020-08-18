@@ -36,6 +36,7 @@ jobs:
       env:
         AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
         AWS_KEY_SECRET: ${{ secrets.AWS_KEY_SECRET }}
+        BUCKET: {YOUR-BUCKET-FOR-UPLOAD}
 ```
 
 Before trying to trigger your new workflow, please set both `AWS_KEY_ID` and `AWS_KEY_SECRET` in the secrets of your repository.

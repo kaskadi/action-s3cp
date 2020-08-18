@@ -2,7 +2,7 @@
 process.chdir('test')
 const AWS = require('aws-sdk')
 const childProc = require('child_process')
-const bucket = 'kaskadi-public'
+const bucket = process.env.BUCKET
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
   region: 'eu-central-1',
