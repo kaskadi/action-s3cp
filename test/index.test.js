@@ -1,5 +1,8 @@
 /* eslint-env mocha */
 process.chdir('test')
+if (!process.env.GITHUB_ACTION) {
+  require('dotenv').config()
+}
 const AWS = require('aws-sdk')
 const childProc = require('child_process')
 const bucket = process.env.BUCKET
