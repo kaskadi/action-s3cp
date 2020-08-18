@@ -24,5 +24,7 @@ function uploadFile (s3, fs, bucket, mime, data) {
     Key: data.dest,
     ContentType: mime.lookup(data.src)
   }
-  return s3.putObject(params).promise()
+  return s3.putObject(params).promise().then(() => {
+    console.log(`${data.src} successfully uploaded at ${data.dest} in ${bucket}!`)
+  })
 }
