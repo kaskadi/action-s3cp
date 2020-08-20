@@ -13,8 +13,6 @@
 
 ***
 
-**This action is updating its dependencies every Sunday at 7AM CET**
-
 # What is this action for?
 
 It allows you to upload files to a given S3 bucket.
