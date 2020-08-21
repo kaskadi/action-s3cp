@@ -1,4 +1,3 @@
-![](https://img.shields.io/github/workflow/status/kaskadi/action-s3cp/update?label=dependencies%20updated&logo=npm)
 ![](https://img.shields.io/github/workflow/status/kaskadi/action-s3cp/testing?label=test&logo=mocha)
 
 **CodeClimate**
