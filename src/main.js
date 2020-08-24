@@ -1,4 +1,3 @@
-require('./helpers/install-dependencies.js')()
 const AWS = require('aws-sdk')
 const fs = require('fs')
 const mime = require('mime-types')
