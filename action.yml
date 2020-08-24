@@ -1,5 +1,6 @@
 name: 'action-s3cp'
-description: 'Copies files over to S3 bucket'
+description: 'a GitHub action that automate deployment of files to S3'
 runs:
   using: 'node12'
-  main: 'index.js'
+  pre: 'src/pre.js'
+  main: 'src/main.js'
