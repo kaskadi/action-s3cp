@@ -1,10 +1,14 @@
-name: testing
+name: build
 on:
-  push:
+  pull_request:
+    branches:
+      - 'master'
+      - 'dev'
+    types: [opened, reopened, edited, synchronize]
     paths:
-      - 'index.js'
+      - 'src/**'
       - 'test/**'
-      - '.github/workflows/testing.yml'
+      - 'package.json'
 jobs:
   coverage:
     runs-on: ubuntu-latest
