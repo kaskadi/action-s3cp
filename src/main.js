@@ -4,8 +4,8 @@ const mime = require('mime-types')
 const cwd = process.cwd()
 const pjson = require(`${cwd}/package.json`)
 const kaskadiOptions = pjson.kaskadi
-const resolvePath = require('../helpers/upload/resolve-path.js')
-const upload = require('../helpers/upload/upload.js')
+const resolvePath = require('./helpers/upload/resolve-path.js')
+const upload = require('./helpers/upload/upload.js')
 
 const s3 = new AWS.S3({
   apiVersion: '2006-03-01',
