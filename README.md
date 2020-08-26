@@ -31,15 +31,23 @@ jobs:
     - name: {YOUR-STEP-name}
       uses: kaskadi/action-s3cp@master
       env:
-        AWS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-        AWS_KEY_SECRET: ${{ secrets.AWS_KEY_SECRET }}
+        AWS_KEY_ID: ${{ secrets.{YOUR-AWS-KEY-ID} }}
+        AWS_KEY_SECRET: ${{ secrets.{YOUR-AWS-KEY-SECRET} }}
         BUCKET: {YOUR-BUCKET-FOR-UPLOAD}
 ```
 
-Before trying to trigger your new workflow, please set both `AWS_KEY_ID` and `AWS_KEY_SECRET` in the secrets of your repository.
-Those credentials are the ones giving programmatic access to an AWS IAM role which can put objects to S3.
-
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
+
+**Environment variables:**
+|     Variable     | Required | Description                                                                                                                                                                           |
+|:----------------:|:--------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|   `AWS_KEY_ID`   |    Yes   | ID of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!**     |
+| `AWS_KEY_SECRET` |    Yes   | Secret of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!** |
+|     `BUCKET`     |    Yes   | Target bucket for file upload. For upload configuration, see below.                                                                                                                   |
+
+---
+
+**Upload configuration:**
 
 In order to tell the action which file to upload to S3, you need to add the following field into your `package.json` file (root level):
 ```
@@ -63,6 +71,6 @@ In order to tell the action which file to upload to S3, you need to add the foll
 }
 ```
 
-**Notes:**
+_Notes:_
 - uploading a folder will always do a recursive upload
 - the placeholder `{branch}` is removed if the action is triggered from `master` or replaced by the current version if the action is triggered from `release/vx.x.x`
