@@ -18,6 +18,8 @@ jobs:
       run: npm i
     - name: Generate coverage report
       run: npm run coverage
+      env:
+        BUCKET: ${{ secrets.S3_PUBLIC_BUCKET }}
     - name: Upload report to Code Climate
       uses: kaskadi/action-cc-reporter@master
       env:
