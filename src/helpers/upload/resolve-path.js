@@ -9,6 +9,7 @@ module.exports = path => {
 }
 
 function getCurrentBranchName () {
-  const refs = process.env.GITHUB_REF.split('/')
+  const ref = process.env.GITHUB_BASE_REF || process.env.GITHUB_REF
+  const refs = ref.split('/')
   return refs[refs.length - 1]
 }
