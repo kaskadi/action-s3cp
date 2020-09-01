@@ -1,5 +1,15 @@
 name: 'action-s3cp'
-description: 'a GitHub action that automate deployment of files to S3'
+description: 'This action allows you to upload files to a given S3 bucket.'
+env:
+  AWS_KEY_ID:
+    description: 'ID of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!**'
+    required: true
+  AWS_KEY_SECRET:
+    description: 'Secret of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!**'
+    required: true
+  BUCKET:
+    description: 'Target bucket for file upload. For upload configuration, see below.'
+    required: true
 runs:
   using: 'node12'
   pre: 'src/pre.js'
