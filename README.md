@@ -20,7 +20,7 @@ This action allows you to upload files to a given S3 bucket.
 
 You can use the following code as a new _GitHub Actions Workflow_:
 
-```
+```yaml
 name: {YOUR-ACTION-NAME}
 on: [{YOUR-ACTION-EVENT}]
 jobs:
@@ -50,7 +50,7 @@ jobs:
 **Upload configuration:**
 
 In order to tell the action which file to upload to S3, you need to add the following field into your `package.json` file (root level):
-```
+```json
 "kaskadi": {
   "s3-push": {
     "files": [
