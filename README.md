@@ -14,7 +14,7 @@
 
 # What is this action for?
 
-It allows you to upload files to a given S3 bucket.
+This action allows you to upload files to a given S3 bucket.
 
 # How to use it?
 
@@ -28,22 +28,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: {YOUR-STEP-name}
+    - name: {YOUR-STEP-NAME}
       uses: kaskadi/action-s3cp@master
       env:
-        AWS_KEY_ID: ${{ secrets.{YOUR-AWS-KEY-ID} }}
-        AWS_KEY_SECRET: ${{ secrets.{YOUR-AWS-KEY-SECRET} }}
-        BUCKET: {YOUR-BUCKET-FOR-UPLOAD}
+        AWS_KEY_ID: {AWS_KEY_ID-VALUE}
+        AWS_KEY_SECRET: {AWS_KEY_SECRET-VALUE}
+        BUCKET: {BUCKET-VALUE}
 ```
 
 **Note:** everything contained in single curly brackets (`{ }`) needs to be replaced by your desired values
 
 **Environment variables:**
 |     Variable     | Required | Description                                                                                                                                                                           |
-|:----------------:|:--------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|   `AWS_KEY_ID`   |    Yes   | ID of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!**     |
-| `AWS_KEY_SECRET` |    Yes   | Secret of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!** |
-|     `BUCKET`     |    Yes   | Target bucket for file upload. For upload configuration, see below.                                                                                                                   |
+| :--------------: | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   `AWS_KEY_ID`   |  `true`  | ID of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!**     |
+| `AWS_KEY_SECRET` |  `true`  | Secret of a programmatic access AWS key attached to an IAM role which has permission to put an object into your target S3 bucket. **Recommend implementing into repository secrets!** |
+|     `BUCKET`     |  `true`  | Target bucket for file upload. For upload configuration, see below.                                                                                                                   |
 
 ---
 
