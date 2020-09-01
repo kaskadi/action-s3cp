@@ -18,7 +18,7 @@
 **Upload configuration:**
 
 In order to tell the action which file to upload to S3, you need to add the following field into your `package.json` file (root level):
-```
+```json
 "kaskadi": {
   "s3-push": {
     "files": [
