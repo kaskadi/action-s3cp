@@ -18,19 +18,15 @@ describe('uploads files to the correct location when branch is master', function
   const ref = 'ref:head/master'
   before(init(ref))
   tests(getPlaceholder(ref))
-  after(afterHandler)
+  after(emptyS3Directory(s3, bucket, 'action-s3cp-test/'))
 })
 describe('uploads files to the correct location when branch is NOT master', function () {
   this.timeout(30000)
   const ref = 'ref:head/release/v1.0.0'
   before(init(ref))
   tests(getPlaceholder(ref))
-  after(afterHandler)
+  after(emptyS3Directory(s3, bucket, 'action-s3cp-test/'))
 })
-
-function afterHandler () {
-  emptyS3Directory(s3, bucket, 'action-s3cp-test/')
-}
 
 function tests (placeHolder) {
   it('should direct upload files', async () => {
